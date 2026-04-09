@@ -51,6 +51,10 @@ Clicked File → New → Notebook
 Selected Python 3 as kernel
 Renamed it to 01_eda.ipynb
 
+git add .
+git commit -m "feat: EDA notebook — missing values + distributions"
+git push
+
 
 
 
