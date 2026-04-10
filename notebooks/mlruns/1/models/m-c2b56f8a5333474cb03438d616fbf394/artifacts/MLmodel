@@ -1,0 +1,23 @@
+artifact_path: /Users/aisirimr/Documents/PREP/titanic-ml-api/notebooks/mlruns/1/models/m-c2b56f8a5333474cb03438d616fbf394/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.14.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.8.0
+    skops_trusted_types: null
+mlflow_version: 3.11.1
+model_id: m-c2b56f8a5333474cb03438d616fbf394
+model_size_bytes: 404074
+model_uuid: m-c2b56f8a5333474cb03438d616fbf394
+prompts: null
+run_id: 67d357a105cc449fb4791da80ad236b9
+utc_time_created: '2026-04-10 12:05:23.716528'
