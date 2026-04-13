@@ -171,3 +171,79 @@ mlflow ui --port 5001
 git add .
 git commit -m "feat: MLflow experiment tracking — 4 runs logged"
 git push
+
+## 🌐 Phase 5 — FastAPI Prediction Endpoint
+
+### What We Built
+A web API that takes passenger details and returns
+survival prediction + probability.
+
+### Folder Created
+- `model/` → stores the saved model file `rf_best.pkl`
+
+### Save Best Model - 03.model.ipynb
+import joblib
+joblib.dump(model, '../model/rf_best.pkl')
+
+
+### Complete src/main.py
+
+### Run the API
+
+uvicorn src.main:app --reload
+
+### Test in Browser 
+http://localhost:8000/docs
+
+### Test — 1st class female (should survive)
+```json
+{
+    "Pclass": 1,
+    "Sex": 1,
+    "Age": 28.0,
+    "SibSp": 1,
+    "Parch": 0,
+    "Fare": 71.28,
+    "Embarked_C": 1,
+    "Embarked_Q": 0,
+    "Embarked_S": 0,
+    "FamilySize": 2
+}
+```
+Response:
+```json
+{
+    "survived": 1,
+    "probability": 0.96
+}
+```
+
+### Test — 3rd class male (should not survive)
+```json
+{
+    "Pclass": 3,
+    "Sex": 0,
+    "Age": 22.0,
+    "SibSp": 1,
+    "Parch": 0,
+    "Fare": 7.25,
+    "Embarked_C": 0,
+    "Embarked_Q": 0,
+    "Embarked_S": 1,
+    "FamilySize": 2
+}
+```
+Response:
+```json
+{
+    "survived": 0,
+    "probability": 0.18
+}
+```
+
+### Commit
+
+git add .
+git commit -m "feat: FastAPI /predict endpoint with Pydantic validation"
+git push
+
