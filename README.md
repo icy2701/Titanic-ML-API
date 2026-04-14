@@ -247,3 +247,130 @@ git add .
 git commit -m "feat: FastAPI /predict endpoint with Pydantic validation"
 git push
 
+# 🐳 Phase 6 — pytest + Docker
+
+---
+
+## What We Built
+Automated tests to verify the API works, and a Docker container so the API runs on any machine identically.
+
+---
+
+## 🧪 Part 1 — pytest (Automated Testing)
+
+### Install Dependencies
+
+pip install pytest httpx
+pip freeze > requirements.txt
+
+pytest → runs the tests
+httpx → lets TestClient make fake requests to the API without starting a real server
+
+### Folder and Files Created
+
+mkdir -p tests
+touch tests/__init__.py
+touch tests/test_api.py
+
+
+tests/ → folder that holds all test files
+__init__.py → empty file that makes tests/ a Python package so imports work
+test_api.py → where we write the actual tests
+
+### tests/test_api.py
+
+### What Each Test Does
+
+| Test | What it sends | What it checks |
+|---|---|---|
+| test_predict_returns_200 | Complete valid passenger | Status 200 + survived + probability keys exist |
+| test_missing_fields_returns_422 | Only one field | Status 422 (Pydantic rejects incomplete data) |
+
+### Run Tests
+
+pytest tests/ -v
+
+### Expected Output
+
+tests/test_api.py::test_predict_returns_200 PASSED
+tests/test_api.py::test_missing_fields_returns_422 PASSED
+
+2 passed in 1.23s
+
+## 🐳 Part 2 — Docker (Containerization)
+
+### What Docker Does
+
+Without Docker:
+Your laptop → needs Python installed → needs venv → needs packages → maybe works
+
+With Docker:
+Any machine → has Docker → run one command → always works
+
+### Files Created
+
+titanic-ml-api/
+├── Dockerfile        → instructions to build the container
+└── .dockerignore     → files to exclude from the container
+
+
+### Dockerfile
+
+### .dockerignore
+
+### Why Each Line is Excluded
+
+venv/          → 200-500MB, Docker installs packages fresh from requirements.txt
+__pycache__/   → Python auto-generated files, not needed
+*.pyc          → compiled Python bytecode, not needed
+.git/          → git history, container doesn't need it
+mlruns/        → MLflow experiment logs, container only needs rf_best.pkl
+notebooks/     → Jupyter notebooks, container only runs the API
+.pytest_cache/ → pytest temporary files, not needed in production
+
+### Build the Image
+
+docker build -t titanic-api .
+
+docker build   → read Dockerfile and build an image
+-t titanic-api → name the image "titanic-api"
+.              → look for Dockerfile in current folder
+
+First time takes 2-3 minutes. After that much faster because of caching.
+
+### Run the Container
+
+
+docker run -p 8000:8000 titanic-api
+
+docker run      → start a container from the image
+-p 8000:8000    → connect port 8000 on your laptop to port 8000 inside container
+titanic-api     → name of the image to run
+
+
+
+### Test It
+
+Open browser → http://localhost:8000/docs
+Same API, same predictions, but now running inside Docker
+
+### Useful Docker Commands
+
+# See all running containers
+docker ps
+
+# Stop a container
+docker stop <container_id>
+
+# Run in background (so terminal stays free)
+docker run -d -p 8000:8000 titanic-api
+
+# See all images you have built
+docker images
+
+
+## Commit
+
+git add tests/ Dockerfile .dockerignore requirements.txt
+git commit -m "feat: Dockerfile + pytest tests passing"
+git push origin main
