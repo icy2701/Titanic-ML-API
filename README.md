@@ -1,3 +1,5 @@
+[![CI Pipeline](https://github.com/icy2701/Titanic-ML-API/actions/workflows/ci.yml/badge.svg)](https://github.com/icy2701/Titanic-ML-API/actions/workflows/ci.yml)
+
 # 🚢 Titanic ML API
 
 A machine learning project to predict Titanic survival, served via a FastAPI web API.
