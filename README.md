@@ -22,6 +22,8 @@ Automated testing with pytest and CI with GitHub Actions.
 
 Raw Data → Feature Engineering → Model Training (MLflow) 
 → FastAPI /predict → Docker Container → GitHub Actions CI
+## MLflow Experiments
+![MLflow](docs/mlflow_screenshot.png)
 
 ## How to Run
 
