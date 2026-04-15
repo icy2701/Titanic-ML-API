@@ -1,4 +1,5 @@
 [![CI Pipeline](https://github.com/icy2701/Titanic-ML-API/actions/workflows/ci.yml/badge.svg)](https://github.com/icy2701/Titanic-ML-API/actions/workflows/ci.yml)
+![Docker](https://img.shields.io/docker/pulls/aisi27/titanic-api)
 
 # 🚢 Titanic ML API
 
